@@ -21,6 +21,6 @@ class User < ApplicationRecord
     validates :last_name_kana
   end
 
-  VALID_PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z{6,}/
-  validates :password, format: { with: VALID_PASSWORD_REGEX, message: "Include both letters and numbers" }
+  VALID_PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i
+  validates_format_of :password, with: VALID_PASSWORD_REGEX, message: "Include both letters and numbers"
 end
