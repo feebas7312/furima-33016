@@ -9,7 +9,7 @@ class Item < ApplicationRecord
   belongs_to :prefecture
   belongs_to :scheduled_delivery
 
-  with_options numericality: true, do
+  with_options numericality: true do
     validates :category
     validates :sales_status
     validates :shipping_fee_status
