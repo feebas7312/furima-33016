@@ -47,6 +47,13 @@ RSpec.describe User, type: :model do
         @user.valid?
         expect(@user.errors.full_messages).to include("Password is too short (minimum is 6 characters)")
       end
+      it "passwordが全角では登録できない" do
+        zenkaku_pass = ('1a' + Faker::Internet.password(min_length: 6)).tr('0-9a-zA-z', '０-９ａ-ｚＡ-Ｚ')
+        @user.password = zenkaku_pass
+        @user.password_confirmation = zenkaku_pass
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password Include both letters and numbers")
+      end
       it "passwordが半角英数字混合でなければ登録できない（数字のみの場合）" do
         @user.password = Faker::Number.number(digits: 6)
         @user.password_confirmation = @user.password
