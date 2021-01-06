@@ -16,15 +16,15 @@ class Item < ApplicationRecord
     validates :price
   end
 
-  validates :price, numericality: { only_integer: true, message: "Half-width number" }
-  validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999, message: "Out of setting range" }
+  validates :price, numericality: { only_integer: true, message: 'Half-width number' }
+  validates :price,
+            numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999, message: 'Out of setting range' }
 
-  with_options numericality: { message: "Select" } do
+  with_options numericality: { message: 'Select' } do
     validates :category_id
     validates :sales_status_id
     validates :shipping_fee_status_id
     validates :prefecture_id
     validates :scheduled_delivery_id
   end
-
 end
