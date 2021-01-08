@@ -5,7 +5,14 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @item_order
+    @item_order = ItemOrder.new(order_params)
+    if @item_order.valid?
+      @item_order.save
+      redirect_to root_path
+    else
+      @item = Item.find(params[:item_id])
+      render action: :index
+    end
   end
 
   private
