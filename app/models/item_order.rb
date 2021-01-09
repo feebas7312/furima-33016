@@ -1,8 +1,9 @@
 class ItemOrder
   include ActiveModel::Model
-  attr_accessor :user_id, :item_id, :postal_code, :prefecture_id, :city, :addresses, :building, :phone_number
+  attr_accessor :user_id, :item_id, :token, :postal_code, :prefecture_id, :city, :addresses, :building, :phone_number
 
   with_options presence: true do
+    validates :token
     validates :postal_code, format: { with: /\A[0-9]{3}-[0-9]{4}\z/, message: "Include correctly" }
     validates :prefecture_id, numericality: { message: "Select" }
     validates :city
