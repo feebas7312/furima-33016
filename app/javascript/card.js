@@ -4,8 +4,7 @@ const pay = () => {
   form.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    const formResult = document.getElementById("charge-form");
-    const formData = new FormData(formResult);
+    const formData = new FormData(form);
 
     const card = {
       number: formData.get("item_order[number]"),
@@ -17,9 +16,8 @@ const pay = () => {
     Payjp.createToken(card, (status, response) => {
       if (status == 200) {
         const token = response.id;
-        const renderDom = document.getElementById("charge-form");
         const tokenObj = `<input value=${token} name='token' type="hidden">`;
-        renderDom.insertAdjacentHTML("beforeend", tokenObj);
+        form.insertAdjacentHTML("beforeend", tokenObj);
       }
 
       document.getElementById("card-number").removeAttribute("name");
@@ -27,7 +25,7 @@ const pay = () => {
       document.getElementById("card-exp-year").removeAttribute("name");
       document.getElementById("card-cvc").removeAttribute("name");
 
-      document.getElementById("charge-form").submit();
+      form.submit();
     });
   });
 };

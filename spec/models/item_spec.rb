@@ -7,8 +7,7 @@ RSpec.describe Item, type: :model do
 
   describe '商品出品' do
     context '商品出品ができるとき' do
-      it "image、name、info、category_id、sales_status_id、shipping_fee_status_id、
-          prefecture_id、scheduled_delivery_id、priceが存在すれば保存できる" do
+      it 'すべての値が正しく入力されていれば購入できる' do
         expect(@item).to be_valid
       end
     end
@@ -73,6 +72,11 @@ RSpec.describe Item, type: :model do
         @item.price = Faker::Number.number(digits: 8)
         @item.valid?
         expect(@item.errors.full_messages).to include('Price Out of setting range')
+      end
+      it 'userが紐付いていないと保存できない' do
+        @item.user = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include('User must exist')
       end
     end
   end
