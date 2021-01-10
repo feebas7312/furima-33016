@@ -10,5 +10,5 @@ function itemPrice(){
     profit.innerHTML = Math.floor(inputValue - addTaxDom.innerHTML);
   });
 
-}
+};
 window.addEventListener('load', itemPrice);
